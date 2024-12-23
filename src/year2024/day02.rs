@@ -77,9 +77,9 @@ pub fn solution_part2() -> i32 {
 
 fn is_report_super_safe(report: Vec<i32>) -> bool {
     let mut t: i32;
-    let mut prev: i32 = report[0] - report[1];
+    let prev: i32 = report[0] - report[1];
 
-    let mut out = false;
+    let out = false;
 
     if is_report_safe(&report) {
         return true;
