@@ -97,17 +97,44 @@ pub fn solution_part2() -> i32 {
     for i in 0..row {
         for j in 0..col {
             if matrix[i][j] == 'A' {
-                println!("X-MAS");
+                if in_boundaries02(i, j) && check_x(&matrix, i, j) {
+                    out += 1;
+                }
             }
         }
     }
     return out;
 }
 
-fn chech_x(matrix: &Vec<Vec<char>>, i: usize, j: usize) -> bool {
-    if !in_boundries(i as i32 - 1, j as i32 - 1) {
-        return false;
+fn check_x(matrix: &Vec<Vec<char>>, i: usize, j: usize) -> bool {
+    let mut out = 0;
+    // fisrt diagonale
+    if matrix[i - 1][j - 1] == 'M' && matrix[i + 1][j + 1] == 'S' {
+        out += 1;
+    } else if matrix[i - 1][j - 1] == 'S' && matrix[i + 1][j + 1] == 'M' {
+        out += 1;
     }
 
-    return false;
+    // second diagonale
+    if matrix[i - 1][j + 1] == 'M' && matrix[i + 1][j - 1] == 'S' {
+        out += 1;
+    } else if matrix[i - 1][j + 1] == 'S' && matrix[i + 1][j - 1] == 'M' {
+        out += 1;
+    }
+
+    if out == 2 {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+fn in_boundaries02(i: usize, j: usize) -> bool {
+    if i <= 0 || i >= 139 {
+        return false;
+    }
+    if j <= 0 || j >= 139 {
+        return false;
+    }
+    return true;
 }
